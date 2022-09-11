@@ -1,0 +1,38 @@
+spring:
+  profiles:
+    active: prod
+  jpa:
+    hibernate:
+      ddl-auto: create
+logging:
+  level:
+    org.springframework.web: DEBUG
+    org.springframework.orm.jpa: DEBUG
+    SoundscapeAPI: INFO
+    hibernate: INFO
+  file:
+    logging.log
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:mysql://localhost:3306/Wheeled_Rescue
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    url: jdbc:mysql://192.168.1.25:3306/Wheeled_Rescue
+    username: ${SERVER_USERNAME}
+    password: ${SERVER_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver

@@ -1,0 +1,20 @@
+stages:
+    - build
+    - deploy
+maven-build:
+    stage: build
+    variables:
+        SERVER_PASSWORD: $SERVER_PASSWORD
+        SERVER_USERNAME: $SERVER_USERNAME
+    script: "mvn package -B"
+    artifacts:
+        paths:
+            - target/*.war
+Deploy:
+    stage: deploy
+    variables:
+        SERVER_PASSWORD: $SERVER_PASSWORD
+        SERVER_USERNAME: $SERVER_USERNAME
+    when: manual
+    script:
+        #- scp -o StrictHostKeyChecking=no /home/gitlab-runner/builds/xEAPXJdS/0/Daniel-Mason/SoundscapeAPI/target/ROOT.war soundscape:/opt/tomcat/webapps
